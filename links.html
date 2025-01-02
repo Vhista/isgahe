@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Links</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #ffcc00, #ff6600);
+            font-family: Arial, sans-serif;
+        }
+
+        .social-links {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links a {
+            display: block;
+            color: #ff6600;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 5px 0;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffcc00;
+        }
+
+        .falling {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+        }
+
+        .chicken {
+            background-image: url('https://vhista.github.io/isgahe/chicken.png');
+            background-size: cover;
+        }
+
+        .burger {
+            background-image: url('https://vhista.github.io/isgahe/burger.pngdd');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="social-links">
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </div>
+
+    <script>
+        const createMovingElement = (type) => {
+            const element = document.createElement('div');
+            element.className = `falling ${type}`;
+            element.style.left = `${Math.random() * window.innerWidth}px`;
+            element.style.top = `-${Math.random() * 100}px`;
+            element.style.animation = `fall ${Math.random() * 5 + 3}s linear infinite, 
+                                       move ${Math.random() * 5 + 3}s ease-in-out infinite alternate`;
+            document.body.appendChild(element);
+
+            element.addEventListener('animationend', () => {
+                document.body.removeChild(element);
+            });
+        };
+
+        setInterval(() => {
+            createMovingElement(Math.random() > 0.5 ? 'chicken' : 'burger');
+        }, 300);
+
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = `
+            @keyframes fall {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(100vh); }
+            }
+
+            @keyframes move {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(100px); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
