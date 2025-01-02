@@ -66,7 +66,7 @@
         }
 
         .burger {
-            background-image: url('https://vhista.github.io/isgahe/burger.pngdd');
+            background-image: url('https://vhista.github.io/isgahe/burger.png');
             background-size: cover;
         }
     </style>
@@ -91,7 +91,7 @@
         const createMovingElement = (type) => {
             const element = document.createElement('div');
             element.className = `falling ${type}`;
-            element.style.left = `${Math.random() * window.innerWidth}px`;
+            element.style.left = `${Math.random() * window.innerWidth * 100}px`;
             element.style.top = `-${Math.random() * 100}px`;
             element.style.animation = `fall ${Math.random() * 3 + 1}s linear infinite, 
                                        move ${Math.random() * 5 + 3}s ease-in-out infinite alternate`;
