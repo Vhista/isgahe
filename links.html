@@ -60,12 +60,12 @@
 
         .chicken {
             background-image: url('https://vhista.github.io/isgahe/chicken.png');
-            background-size: center;
+            background-size: cover;
         }
 
         .burger {
             background-image: url('https://vhista.github.io/isgahe/burger.png');
-            background-size: center;
+            background-size: cover;
         }
     </style>
 </head>
@@ -98,14 +98,15 @@
                 document.body.removeChild(element);
             });
 
-            element.addEventListener('mouseover', () => {
-                element.style.animationPlayState = 'paused';
-                element.style.transform = 'scale(1.2)';
-            });
-
-            element.addEventListener('mouseout', () => {
-                element.style.animationPlayState = 'running';
-                element.style.transform = 'scale(1)';
+            document.addEventListener('mousemove', (event) => {
+                const rect = element.getBoundingClientRect();
+                const dx = rect.x + rect.width / 2 - event.clientX;
+                const dy = rect.y + rect.height / 2 - event.clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    const angle = Math.atan2(dy, dx);
+                    element.style.transform = `translate(${Math.cos(angle) * 100}px, ${Math.sin(angle) * 100}px)`;
+                }
             });
         };
 
