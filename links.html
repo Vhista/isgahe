@@ -8,31 +8,49 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: linear-gradient(to bottom, #ffcc00, #ff6600);
+            background: linear-gradient(90deg, #ffcc00, #ff6600, #ff0000);
+            background-size: 300% 300%;
+            animation: gradientShift 10s ease infinite;
             font-family: Arial, sans-serif;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .social-links {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         .social-links a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #ff6600;
             text-decoration: none;
             font-size: 18px;
-            margin: 5px 0;
+            margin: 10px 0;
             transition: color 0.3s;
         }
 
         .social-links a:hover {
             color: #ffcc00;
+        }
+
+        .social-links a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
 
         .falling {
@@ -55,10 +73,18 @@
 </head>
 <body>
     <div class="social-links">
-        <a href="https://twitter.com" target="_blank">Twitter</a>
-        <a href="https://facebook.com" target="_blank">Facebook</a>
-        <a href="https://instagram.com" target="_blank">Instagram</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank">
+            <img src="https://example.com/twitter-icon.png" alt="Twitter">Twitter
+        </a>
+        <a href="https://facebook.com" target="_blank">
+            <img src="https://example.com/facebook-icon.png" alt="Facebook">Facebook
+        </a>
+        <a href="https://instagram.com" target="_blank">
+            <img src="https://example.com/instagram-icon.png" alt="Instagram">Instagram
+        </a>
+        <a href="https://linkedin.com" target="_blank">
+            <img src="https://example.com/linkedin-icon.png" alt="LinkedIn">LinkedIn
+        </a>
     </div>
 
     <script>
@@ -67,7 +93,7 @@
             element.className = `falling ${type}`;
             element.style.left = `${Math.random() * window.innerWidth}px`;
             element.style.top = `-${Math.random() * 100}px`;
-            element.style.animation = `fall ${Math.random() * 5 + 3}s linear infinite, 
+            element.style.animation = `fall ${Math.random() * 3 + 1}s linear infinite, 
                                        move ${Math.random() * 5 + 3}s ease-in-out infinite alternate`;
             document.body.appendChild(element);
 
