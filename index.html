@@ -44,6 +44,26 @@
                 transform: translateY(-20px);
             }
         }
+
+        .falling {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            pointer-events: none;
+        }
+
+        .chicken {
+            background-image: url('https://vhista.github.io/isgahe/chicken.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .burger {
+            background-image: url('https://images.ctfassets.net/o19mhvm9a2cm/6HlFvgCJVyLQg6Z8HTW783/2444b57523423fa351b3165dffaa2332/Website_NoShadows_Sandwich_BNC_Double.png');
+               background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
     </style>
 </head>
 <body>
@@ -52,6 +72,43 @@
     </div>
 
     <script>
+  const createFallingElement = (type) => {
+            const element = document.createElement('div');
+            element.className = `falling ${type}`;
+            element.style.left = `${Math.random() * window.innerWidth}px`;
+            element.style.top = `-${Math.random() * 100}px`;
+            element.style.animation = `fall ${Math.random() * 3 + 1}s linear`;
+            document.body.appendChild(element);
+
+            element.addEventListener('animationend', () => {
+                document.body.removeChild(element);
+            });
+
+            document.addEventListener('mousemove', (event) => {
+                const rect = element.getBoundingClientRect();
+                const dx = rect.x + rect.width / 1 - event.clientX;
+                const dy = rect.y + rect.height / 1 - event.clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    const angle = Math.atan2(dy, dx);
+                    element.style.transform = `translate(${Math.cos(angle) * 100}px, ${Math.sin(angle) * 100}px)`;
+                }
+            });
+        };
+
+        setInterval(() => {
+            createFallingElement(Math.random() > 0.5 ? 'chicken' : 'burger');
+        }, 500);
+
+        const styleSheet = document.createElement("style");
+        styleSheet.textContent = `
+            @keyframes fall {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(100vh); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+        
         function generateYesOrNo() {
             const resultElement = document.querySelector('.result');
             const randomBoolean = Math.random() < 0.5;
