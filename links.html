@@ -102,8 +102,8 @@
 
             document.addEventListener('mousemove', (event) => {
                 const rect = element.getBoundingClientRect();
-                const dx = rect.x + rect.width / 2 - event.clientX;
-                const dy = rect.y + rect.height / 2 - event.clientY;
+                const dx = rect.x + rect.width / 1 - event.clientX;
+                const dy = rect.y + rect.height / 1 - event.clientY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < 100) {
                     const angle = Math.atan2(dy, dx);
