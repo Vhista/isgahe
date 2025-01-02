@@ -88,13 +88,12 @@
     </div>
 
     <script>
-        const createMovingElement = (type) => {
+        const createFallingElement = (type) => {
             const element = document.createElement('div');
             element.className = `falling ${type}`;
-            element.style.left = `${Math.random() * window.innerWidth * 100}px`;
+            element.style.left = `${Math.random() * window.innerWidth}px`;
             element.style.top = `-${Math.random() * 100}px`;
-            element.style.animation = `fall ${Math.random() * 3 + 1}s linear infinite, 
-                                       move ${Math.random() * 5 + 3}s ease-in-out infinite alternate`;
+            element.style.animation = `fall ${Math.random() * 3 + 1}s linear`;
             document.body.appendChild(element);
 
             element.addEventListener('animationend', () => {
@@ -103,7 +102,7 @@
         };
 
         setInterval(() => {
-            createMovingElement(Math.random() > 0.5 ? 'chicken' : 'burger');
+            createFallingElement(Math.random() > 0.5 ? 'chicken' : 'burger');
         }, 300);
 
         const styleSheet = document.createElement("style");
@@ -111,11 +110,6 @@
             @keyframes fall {
                 0% { transform: translateY(0); }
                 100% { transform: translateY(100vh); }
-            }
-
-            @keyframes move {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(100px); }
             }
         `;
         document.head.appendChild(styleSheet);
