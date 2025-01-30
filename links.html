@@ -68,6 +68,11 @@
             pointer-events: none;
         }
 
+        .penta {
+            background-image: url('https://vhista.github.io/isgahe/penta.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
         .chicken {
             background-image: url('https://vhista.github.io/isgahe/chicken.png');
             background-size: contain;
@@ -139,7 +144,9 @@
         setInterval(() => {
             createFallingElement(Math.random() > 0.5 ? 'chicken' : 'burger');
         }, 500);
-
+        setInterval(() => {
+            createFallingElement(Math.random() > 0.7 ? 'penta' : 'pees');
+        }, 500);
         const styleSheet = document.createElement("style");
         styleSheet.textContent = `
             @keyframes fall {
